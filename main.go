@@ -18,7 +18,7 @@ func main() {
 	flag.Parse()
 
 	go func() {
-		ticker := time.NewTicker(5 * time.Second)
+		ticker := time.NewTicker(15 * time.Second)
 		for {
 			controllers.SyncNodeList(*nsqLookupdAddress)
 			<-ticker.C
@@ -28,6 +28,6 @@ func main() {
 	prometheus.MustRegister(controllers.Collector)
 
 	http.Handle("/metrics", promhttp.Handler())
-	log.Fatal(http.ListenAndServe(":9527", nil))
+	log.Fatal(http.ListenAndServe(":9528", nil))
 
 }
